@@ -1,5 +1,7 @@
-import Page from "../components/Page";
-
 export default function IndexPage() {
-  return <div>index page</div>;
+  return (
+    <div>
+      <h1>Welcome to Home Page</h1>
+    </div>
+  );
 }
