@@ -22,14 +22,13 @@ export default function Pagination({ page }) {
   return (
     <PaginationStyles>
       <Link href={`/users/${page - 1}`}>
-        <a aria-disabled={page <= 1}>Prev</a>
+        <a aria-disabled={page <= 1}> ⬅ </a>
       </Link>
       <p>
-        Page {page} of {pageCount}
+        {page} - {pageCount} of {pageCount}
       </p>
-      <p>{count} Total Users</p>
       <Link href={`/users/${page + 1}`}>
-        <a aria-disabled={page >= pageCount}>Next</a>
+        <a aria-disabled={page >= pageCount}> ➡ </a>
       </Link>
     </PaginationStyles>
   );

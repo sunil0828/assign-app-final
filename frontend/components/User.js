@@ -29,7 +29,7 @@ export default function User({ user }) {
                 },
               }}
             >
-              ✏️
+              <button>✏️</button>
             </Link>
             (...)
             <DeleteUser id={user.id}>Delete </DeleteUser>

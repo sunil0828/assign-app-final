@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import { perPage } from "../config";
+import ErrorMessage from "./ErrorMessage";
 import User from "./User";
 
 export const ALL_USERS_QUERY = gql`
@@ -21,7 +22,7 @@ export default function Users({ page }) {
     },
   });
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.message}</p>;
+  if (error) return <ErrorMessage>Error : {error.message}</ErrorMessage>;
   console.log(data);
   return (
     <div>

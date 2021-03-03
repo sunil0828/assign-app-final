@@ -8,8 +8,7 @@ import {
 } from "@keystone-next/keystone/session";
 
 const databaseURL =
-  process.env.DATABASE_URL ||
-  "mongodb://localhost/keystone-assign-app-tutorial";
+  process.env.DATABASE_URL || "mongodb://localhost/keystone-assign-app";
 
 const sessionConfig = {
   maxAge: 60 * 60 * 24 * 360, // How long they stay signed in?
@@ -22,7 +21,6 @@ const { withAuth } = createAuth({
   secretField: "password",
   initFirstItem: {
     fields: ["name", "email", "password"],
-    // TODO: Add in inital roles here
   },
 });
 
@@ -38,20 +36,14 @@ export default withAuth(
     db: {
       adapter: "mongoose",
       url: databaseURL,
-      // TODO: Add data seeding here
     },
     lists: createSchema({
-      // Schema items go in here
       User,
     }),
     ui: {
-      // Show the UI only for poeple who pass this test
-      isAccessAllowed: ({ session }) =>
-        // console.log(session);
-        !!session?.data,
+      isAccessAllowed: ({ session }) => !!session?.data,
     },
     session: withItemData(statelessSessions(sessionConfig), {
-      // GraphQL Query
       User: "id name email",
     }),
   })

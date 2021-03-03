@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
+import ErrorMessage from "./ErrorMessage";
 
 const SINGLE_USER_QUERY = gql`
   query SINGLE_USER_QUERY($id: ID!) {
@@ -20,14 +21,19 @@ export default function SingleUser({ id }) {
     },
   });
   if (loading) return <p>Loading...</p>;
-  if (error) return <p error={error} />;
-  console.log(data);
+  if (error) return <ErrorMessage error={error} />;
   const { User } = data;
-  console.log(User);
   return (
     <div>
-      <h2>{User.name}</h2>
-      <p>{User.email}</p>
+      <h2>
+        Name: <span>{User.name}</span>
+      </h2>
+      <p>
+        Email: <span>{User.email}</span>
+      </p>
+      <p>
+        Contact Number: <span>{User.phoneNumber}</span>
+      </p>
     </div>
   );
 }

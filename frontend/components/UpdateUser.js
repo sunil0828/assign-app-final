@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import useForm from "../lib/useForm";
+import ErrorMessage from "./ErrorMessage";
 import { SINGLE_USER_QUERY } from "./SingleUser";
 import Form from "./styles/Form";
 
@@ -31,7 +32,7 @@ export default function UpdateUser({ id }) {
   return (
     <Form
       onSubmit={async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         const res = await updateUser({
           variables: {
             id,
@@ -42,10 +43,9 @@ export default function UpdateUser({ id }) {
         console.log(res);
       }}
     >
-      <h2>Add user account</h2>
-      <p error={error || updateError} />
-      <fieldset>
-        {data?.createUser && <p>User added with {data.createUser.email}...!</p>}
+      <h2>Update user account</h2>
+      <ErrorMessage error={error || updateError} />
+      <fieldset disabled={updateLoading} aria-busy={updateLoading}>
         <label htmlFor="name">
           Name
           <input

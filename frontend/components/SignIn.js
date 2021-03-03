@@ -3,6 +3,7 @@ import { useMutation } from "@apollo/client";
 import useForm from "../lib/useForm";
 import { CURRENT_USER_QUERY } from "./UseUser";
 import Form from "./styles/Form";
+import ErrorMessage from "./ErrorMessage";
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION($email: String!, $password: String!) {
@@ -29,16 +30,14 @@ export default function SignIn() {
   });
   const [signin, { data, loading }] = useMutation(SIGNIN_MUTATION, {
     variables: inputs,
-    // refetch the currently logged in user
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
   async function handleSubmit(e) {
-    e.preventDefault(); // stop the form from submitting
+    e.preventDefault();
     console.log(inputs);
     const res = await signin();
     console.log(res);
     resetForm();
-    // Send the email and password to the graphqlAPI
   }
   const error =
     data?.authenticateUserWithPassword.__typename ===
@@ -48,7 +47,7 @@ export default function SignIn() {
   return (
     <Form method="POST" onSubmit={handleSubmit}>
       <h2>Sign Into Your Account</h2>
-      <p error={error} />
+      <ErrorMessage error={error} />
       <fieldset>
         <label htmlFor="email">
           Email

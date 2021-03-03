@@ -26,7 +26,6 @@ export default function Header() {
         <h1>
           <Link href="/">Admin</Link>
         </h1>
-
         <Navbar />
       </div>
       <div className="sub-bar">

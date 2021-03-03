@@ -5,13 +5,11 @@ import useUser from "./UseUser";
 
 export default function Navbar() {
   const user = useUser();
-  console.log(user);
   return (
     <NavStyles>
       {user && (
         <>
           <Link href="/profile">Profile</Link>
-          <Link href="/about">About</Link>
           <Link href="/users">Users</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/addUser">Add User</Link>
